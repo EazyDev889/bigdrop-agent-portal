@@ -137,6 +137,7 @@ class BD_Public {
         wp_localize_script( 'bd-portal-js', 'BD', array(
             'restUrl'      => rest_url( 'bigdrop/v1/' ),
             'nonce'        => wp_create_nonce( 'wp_rest' ),
+            'version'      => BD_VERSION, // <-- ADDED: Enables auto-refresh on version changes
             'ajaxUrl'      => admin_url( 'admin-ajax.php' ),
             'portalUrl'    => $this->portal_url(),
             'homeUrl'      => home_url( '/' ),
@@ -155,22 +156,22 @@ class BD_Public {
                 'desktopNotify'   => (int) BD_Settings::get( 'desktop_notifications', 1 ),
                 'escalateMinutes' => (int) BD_Settings::get( 'escalate_after_minutes', 3 ),
             ),
-            'isAdmin'      => BD_Roles::is_admin() ? 1 : 0,
+            'isAdmin'        => BD_Roles::is_admin() ? 1 : 0,
             'canViewClients' => BD_Roles::can_view_clients() ? 1 : 0,
-            'internalLevel' => current_user_can( 'manage_options' ) ? 'admin' : ( current_user_can( 'bd_manage_canned' ) ? 'team_lead' : 'agent' ),
+            'internalLevel'  => current_user_can( 'manage_options' ) ? 'admin' : ( current_user_can( 'bd_manage_canned' ) ? 'team_lead' : 'agent' ),
             'internalUploadNonce' => wp_create_nonce( 'bd_upload_media' ),
-            'i18n'         => array(
-                'online'      => __( 'Online', 'bigdrop' ),
-                'offline'     => __( 'Offline', 'bigdrop' ),
-                'sending'     => __( 'Sending…', 'bigdrop' ),
-                'noChats'     => __( 'No chats yet.', 'bigdrop' ),
-                'typeReply'   => __( 'Type a reply…', 'bigdrop' ),
-                'send'        => __( 'Send', 'bigdrop' ),
-                'resolve'     => __( 'Resolve', 'bigdrop' ),
-                'unresolve'   => __( 'Unresolve', 'bigdrop' ),
-                'search'      => __( 'Search chats, clients…', 'bigdrop' ),
+            'i18n'           => array(
+                'online'        => __( 'Online', 'bigdrop' ),
+                'offline'       => __( 'Offline', 'bigdrop' ),
+                'sending'       => __( 'Sending…', 'bigdrop' ),
+                'noChats'       => __( 'No chats yet.', 'bigdrop' ),
+                'typeReply'     => __( 'Type a reply…', 'bigdrop' ),
+                'send'          => __( 'Send', 'bigdrop' ),
+                'resolve'       => __( 'Resolve', 'bigdrop' ),
+                'unresolve'     => __( 'Unresolve', 'bigdrop' ),
+                'search'        => __( 'Search chats, clients…', 'bigdrop' ),
                 'notifications' => __( 'Notifications', 'bigdrop' ),
-                'markRead'    => __( 'Mark all read', 'bigdrop' ),
+                'markRead'      => __( 'Mark all read', 'bigdrop' ),
             ),
         ) );
 
@@ -184,13 +185,13 @@ class BD_Public {
         );
 
         wp_localize_script( 'bd-pwa-register', 'BD_PWA', array(
-            'swUrl'    => home_url( '/sw.js' ),
-            'scope'    => '/',
-            'restUrl'  => rest_url( 'bigdrop/v1/' ),
-            'nonce'    => wp_create_nonce( 'wp_rest' ),
-            'vapidKey' => get_option( 'bd_vapid_public_key' ),
-            'homeUrl'  => home_url( '/' ),
-            'portalUrl'=> $this->portal_url(),
+            'swUrl'     => home_url( '/sw.js' ),
+            'scope'     => '/',
+            'restUrl'   => rest_url( 'bigdrop/v1/' ),
+            'nonce'     => wp_create_nonce( 'wp_rest' ),
+            'vapidKey'  => get_option( 'bd_vapid_public_key' ),
+            'homeUrl'   => home_url( '/' ),
+            'portalUrl' => $this->portal_url(),
         ) );
     }
 

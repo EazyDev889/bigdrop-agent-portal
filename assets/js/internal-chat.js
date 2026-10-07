@@ -1,6 +1,7 @@
 /* ==========================================================
-   Big Drop - Internal Team Chat (v1.0.4)
-   Pure ASCII - no emoji encoding issues.
+   Big Drop - Internal Team Chat (v1.0.5)
+   Fixed: Double-sending/rendering race condition with poller
+   Fixed: Rapid-click thread loading overlaps
    ========================================================== */
 (function () {
   'use strict';
@@ -20,7 +21,8 @@
     unread: { updates: 0, tickets: 0, total: 0 },
     pendingAttachment: null,
     pendingPreviewUrl: null,
-    isPosting: false
+    isPosting: false,
+    isLoadingThread: false
   };
 
   var $container;
@@ -244,6 +246,10 @@
   // OPEN THREAD
   // ============================================================
   function openThread(threadId) {
+    // Prevent overlapping requests if the same thread is clicked rapidly
+    if (state.activeThreadId === threadId && state.isLoadingThread) return;
+    
+    state.isLoadingThread = true;
     state.activeThreadId = threadId;
     state.lastMessageId = 0;
 
@@ -263,6 +269,8 @@
       refreshUnread();
     }).catch(function (err) {
       toast('Failed to open thread: ' + err.message, 'error');
+    }).then(function() {
+      state.isLoadingThread = false;
     });
   }
 
@@ -573,29 +581,36 @@
       state.pendingAttachment = null;
       renderAttachStrip();
 
-      var newMsg = {
-        id: res.id,
-        sender_id: config.currentUser.id,
-        sender_name: config.currentUser.name,
-        sender_role: state.level,
-        message: text,
-        created_at: res.time
-      };
-      if (res._uploadResult) {
-        newMsg.attachment_url  = res._uploadResult.attachment_url || '';
-        newMsg.attachment_name = res._uploadResult.attachment_name || '';
-        newMsg.attachment_type = res._uploadResult.attachment_type || '';
-        newMsg.attachment_size = res._uploadResult.attachment_size || 0;
-      }
+      var msgId = parseInt(res.id, 10);
+      
+      // FIX: Check if the poller already added this message to prevent double-rendering
+      var exists = state.messages.some(function(m) { return parseInt(m.id, 10) === msgId; });
 
-      state.messages.push(newMsg);
-      if (res.id > state.lastMessageId) state.lastMessageId = res.id;
+      if (!exists) {
+        var newMsg = {
+          id: msgId,
+          sender_id: parseInt(config.currentUser.id, 10),
+          sender_name: config.currentUser.name,
+          sender_role: state.level,
+          message: text,
+          created_at: res.time
+        };
+        if (res._uploadResult) {
+          newMsg.attachment_url  = res._uploadResult.attachment_url || '';
+          newMsg.attachment_name = res._uploadResult.attachment_name || '';
+          newMsg.attachment_type = res._uploadResult.attachment_type || '';
+          newMsg.attachment_size = res._uploadResult.attachment_size || 0;
+        }
 
-      var messagesEl = document.getElementById('bd-ichat-messages');
-      if (messagesEl) {
-        if (messagesEl.querySelector('.bd-empty')) messagesEl.innerHTML = '';
-        messagesEl.insertAdjacentHTML('beforeend', renderOneMessage(newMsg));
-        scrollToBottom();
+        state.messages.push(newMsg);
+        if (msgId > state.lastMessageId) state.lastMessageId = msgId;
+
+        var messagesEl = document.getElementById('bd-ichat-messages');
+        if (messagesEl) {
+          if (messagesEl.querySelector('.bd-empty')) messagesEl.innerHTML = '';
+          messagesEl.insertAdjacentHTML('beforeend', renderOneMessage(newMsg));
+          scrollToBottom();
+        }
       }
 
       loadThreads();
@@ -934,11 +949,11 @@
 
   function esc(str) {
     return String(str == null ? '' : str)
-      .replace(/&/g, '&' + 'amp;')
-      .replace(/</g, '&' + 'lt;')
-      .replace(/>/g, '&' + 'gt;')
-      .replace(/"/g, '&' + 'quot;')
-      .replace(/'/g, '&' + '#39;');
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
   function escAttr(s) { return esc(s); }
 
