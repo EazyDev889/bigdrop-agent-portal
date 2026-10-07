@@ -9,9 +9,6 @@ defined( 'ABSPATH' ) || exit;
 
 class BD_Activator {
 
-    /**
-     * Runs on plugin activation.
-     */
     public static function activate() {
         self::create_tables();
         self::create_roles();
@@ -23,18 +20,13 @@ class BD_Activator {
         flush_rewrite_rules();
     }
 
-    /**
-     * Runs on plugin deactivation.
-     */
     public static function deactivate() {
         wp_clear_scheduled_hook( 'bd_escalate_chats' );
         wp_clear_scheduled_hook( 'bd_cleanup_old' );
+        wp_clear_scheduled_hook( 'bd_archive_chats' );
         flush_rewrite_rules();
     }
 
-    /**
-     * Create all custom database tables.
-     */
     private static function create_tables() {
         global $wpdb;
         $charset = $wpdb->get_charset_collate();
@@ -71,7 +63,33 @@ class BD_Activator {
             message LONGTEXT NOT NULL,
             is_read TINYINT(1) DEFAULT 0,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            INDEX idx_chat (chat_id, created_at)
+            INDEX idx_chat (chat_id, created_at),
+            INDEX idx_unread (chat_id, is_read, sender_type)
+        ) {$charset};" );
+
+        // --- Archive Tables (For Performance) ---
+        dbDelta( "CREATE TABLE {$p}bd_chats_archive (
+            id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            visitor_id VARCHAR(64) NOT NULL,
+            visitor_name VARCHAR(100) DEFAULT '',
+            visitor_email VARCHAR(150) DEFAULT '',
+            visitor_phone VARCHAR(30) DEFAULT '',
+            assigned_agent_id BIGINT UNSIGNED DEFAULT 0,
+            status VARCHAR(20) DEFAULT 'resolved',
+            resolution_time_seconds INT DEFAULT 0,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            resolved_at DATETIME NULL,
+            INDEX idx_date (created_at)
+        ) {$charset};" );
+
+        dbDelta( "CREATE TABLE {$p}bd_messages_archive (
+            id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            chat_id BIGINT UNSIGNED NOT NULL,
+            sender_type VARCHAR(20) NOT NULL,
+            sender_id BIGINT UNSIGNED DEFAULT 0,
+            message LONGTEXT NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            INDEX idx_chat (chat_id)
         ) {$charset};" );
 
         // --- Internal team messages ---
@@ -146,25 +164,19 @@ class BD_Activator {
             last_synced DATETIME DEFAULT CURRENT_TIMESTAMP
         ) {$charset};" );
         
-        // Internal team chat tables (created by BD_Internal_Chat).
         if ( ! class_exists( 'BD_Internal_Chat' ) ) {
             require_once BD_PATH . 'includes/class-bd-internal-chat.php';
         }
         BD_Internal_Chat::create_tables();
     }
 
-    /**
-     * Create custom WordPress roles.
-     */
     private static function create_roles() {
-        // Agent role.
         add_role( 'bd_agent', 'Big Drop Agent', array(
             'read'             => true,
             'bd_access_portal' => true,
             'bd_take_chats'    => true,
         ) );
 
-        // Team Lead role (has agent caps + extra).
         add_role( 'bd_team_lead', 'Big Drop Team Lead', array(
             'read'               => true,
             'bd_access_portal'   => true,
@@ -174,25 +186,15 @@ class BD_Activator {
             'bd_view_clients'    => true,
         ) );
 
-        // Give the administrator all Big Drop caps.
         $admin = get_role( 'administrator' );
         if ( $admin ) {
-            $caps = array(
-                'bd_access_portal',
-                'bd_take_chats',
-                'bd_view_all_agents',
-                'bd_manage_canned',
-                'bd_view_clients',
-            );
+            $caps = array( 'bd_access_portal', 'bd_take_chats', 'bd_view_all_agents', 'bd_manage_canned', 'bd_view_clients' );
             foreach ( $caps as $cap ) {
                 $admin->add_cap( $cap );
             }
         }
     }
 
-    /**
-     * Create the portal page if it doesn't exist.
-     */
     private static function create_portal_page() {
         $existing = get_option( 'bd_portal_page_id' );
         if ( $existing && get_post( $existing ) ) {
@@ -212,10 +214,6 @@ class BD_Activator {
         }
     }
 
-    /**
-     * Generate VAPID keys for Web Push.
-     * Uses OpenSSL (available on Hostinger).
-     */
     private static function generate_vapid_keys() {
         if ( get_option( 'bd_vapid_public_key' ) && get_option( 'bd_vapid_private_key' ) ) {
             return;
@@ -231,60 +229,33 @@ class BD_Activator {
         );
 
         $key = openssl_pkey_new( $config );
-        if ( ! $key ) {
-            return;
-        }
+        if ( ! $key ) return;
 
         $details = openssl_pkey_get_details( $key );
-        if ( empty( $details['ec']['x'] ) || empty( $details['ec']['y'] ) ) {
-            return;
-        }
+        if ( empty( $details['ec']['x'] ) || empty( $details['ec']['y'] ) ) return;
 
-        // Public key: 0x04 prefix + X + Y (uncompressed point format).
         $public_raw = "\x04" . $details['ec']['x'] . $details['ec']['y'];
-
         openssl_pkey_export( $key, $private_pem );
 
-        // Encode as base64url.
         update_option( 'bd_vapid_public_key',  self::base64url_encode( $public_raw ) );
         update_option( 'bd_vapid_private_key', self::base64url_encode( $private_pem ) );
     }
 
-    /**
-     * Base64url encode (RFC 4648 §5).
-     */
     private static function base64url_encode( $data ) {
         return rtrim( strtr( base64_encode( $data ), '+/', '-_' ), '=' );
     }
 
-    /**
-     * Seed a couple of default canned replies.
-     */
     private static function seed_default_canned_replies() {
         global $wpdb;
         $p     = $wpdb->prefix;
         $count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$p}bd_canned_replies" );
-        if ( $count > 0 ) {
-            return;
-        }
+        if ( $count > 0 ) return;
 
         $defaults = array(
-            array(
-                'header'  => 'Standard Greeting',
-                'message' => "Hello! Welcome to Big Drop. How can I help you today?",
-            ),
-            array(
-                'header'  => 'How to register',
-                'message' => "To register, open the Big Drop app, tap 'Sign Up', enter your phone number, and follow the OTP verification. Let me know if you'd like me to walk you through it.",
-            ),
-            array(
-                'header'  => 'Installation timing',
-                'message' => "Installation is typically scheduled within 24–48 hours after you complete registration for the Free Water Kit.",
-            ),
-            array(
-                'header'  => 'Closing a chat',
-                'message' => "Thanks for chatting with Big Drop. Have a great day! Feel free to message us anytime.",
-            ),
+            array( 'header' => 'Standard Greeting', 'message' => "Hello! Welcome to Big Drop. How can I help you today?" ),
+            array( 'header' => 'How to register', 'message' => "To register, open the Big Drop app, tap 'Sign Up', enter your phone number, and follow the OTP verification." ),
+            array( 'header' => 'Installation timing', 'message' => "Installation is typically scheduled within 24–48 hours after you complete registration." ),
+            array( 'header' => 'Closing a chat', 'message' => "Thanks for chatting with Big Drop. Have a great day!" ),
         );
 
         foreach ( $defaults as $row ) {
@@ -296,15 +267,15 @@ class BD_Activator {
         }
     }
 
-    /**
-     * Schedule recurring cron jobs.
-     */
     private static function schedule_cron() {
         if ( ! wp_next_scheduled( 'bd_escalate_chats' ) ) {
             wp_schedule_event( time(), 'bd_every_minute', 'bd_escalate_chats' );
         }
         if ( ! wp_next_scheduled( 'bd_cleanup_old' ) ) {
             wp_schedule_event( time(), 'daily', 'bd_cleanup_old' );
+        }
+        if ( ! wp_next_scheduled( 'bd_archive_chats' ) ) {
+            wp_schedule_event( time(), 'monthly', 'bd_archive_chats' );
         }
     }
 }
