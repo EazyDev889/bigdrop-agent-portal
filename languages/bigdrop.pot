@@ -1,0 +1,670 @@
+# Copyright (C) 2026 Big Drop
+# This file is distributed under the GPL-2.0-or-later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: Big Drop Agent Portal 1.0.0\n"
+"Report-Msgid-Bugs-To: https://bigdrop.co.zw\n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Big Drop\n"
+"X-Domain: bigdrop\n"
+
+# ============================================================
+#  General / Plugin
+# ============================================================
+msgid "Big Drop"
+msgstr ""
+
+msgid "Big Drop Agent Portal"
+msgstr ""
+
+msgid "Complete agent portal with live chat, notifications & PWA."
+msgstr ""
+
+msgid "Big Drop Support"
+msgstr ""
+
+msgid "Agent Portal"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Pre-Reply Messages"
+msgstr ""
+
+msgid "Add an Agent"
+msgstr ""
+
+msgid "Client Accounts"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Chatroom"
+msgstr ""
+
+msgid "Agent Performance"
+msgstr ""
+
+# ============================================================
+#  Login / Auth
+# ============================================================
+msgid "Please sign in with your agent account to continue."
+msgstr ""
+
+msgid "Sign In"
+msgstr ""
+
+msgid "You do not have permission to access the Agent Portal. Please contact your administrator."
+msgstr ""
+
+msgid "Agent access only — accounts are created by an administrator."
+msgstr ""
+
+# ============================================================
+#  Dashboard
+# ============================================================
+msgid "Hi %s, welcome back!"
+msgstr ""
+
+msgid "Loading your queue…"
+msgstr ""
+
+msgid "Open Chatroom"
+msgstr ""
+
+msgid "View my stats"
+msgstr ""
+
+msgid "Incoming Chats Today"
+msgstr ""
+
+msgid "Waiting in Queue"
+msgstr ""
+
+msgid "Avg Response Time"
+msgstr ""
+
+msgid "Resolution Rate"
+msgstr ""
+
+msgid "All-Time Chats"
+msgstr ""
+
+msgid "All-Time Resolved"
+msgstr ""
+
+msgid "All-Time Unresolved"
+msgstr ""
+
+msgid "All-Time Visitors"
+msgstr ""
+
+msgid "Chats This Week"
+msgstr ""
+
+msgid "Resolved"
+msgstr ""
+
+msgid "Pending"
+msgstr ""
+
+msgid "Unresolved"
+msgstr ""
+
+msgid "Agent Roster"
+msgstr ""
+
+msgid "No agents."
+msgstr ""
+
+msgid "Loading…"
+msgstr ""
+
+# ============================================================
+#  Chatroom
+# ============================================================
+msgid "New"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Resolved"
+msgstr ""
+
+msgid "Unresolved"
+msgstr ""
+
+msgid "Select a chat"
+msgstr ""
+
+msgid "Choose a conversation from the list to begin."
+msgstr ""
+
+msgid "No chats in this tab."
+msgstr ""
+
+msgid "No messages yet. Say hello!"
+msgstr ""
+
+msgid "Type a reply…"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Sending…"
+msgstr ""
+
+msgid "Resolve"
+msgstr ""
+
+msgid "Unresolve"
+msgstr ""
+
+msgid "Reopen"
+msgstr ""
+
+msgid "Canned reply…"
+msgstr ""
+
+msgid "Waiting %s"
+msgstr ""
+
+msgid "No phone"
+msgstr ""
+
+msgid "No email"
+msgstr ""
+
+# ============================================================
+#  Performance
+# ============================================================
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "Apply Filter"
+msgstr ""
+
+msgid "Agent"
+msgstr ""
+
+msgid "Chats Taken"
+msgstr ""
+
+msgid "Resolved ≤3min"
+msgstr ""
+
+msgid "Avg Response"
+msgstr ""
+
+msgid "★ Best Performer"
+msgstr ""
+
+msgid "No data for this range."
+msgstr ""
+
+# ============================================================
+#  Clients
+# ============================================================
+msgid "Search by name, account number, or phone"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Enter a search term to find a client."
+msgstr ""
+
+msgid "Enter at least 2 characters."
+msgstr ""
+
+msgid "No matching client found."
+msgstr ""
+
+msgid "Client Name"
+msgstr ""
+
+msgid "Account Number"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "ID Number"
+msgstr ""
+
+msgid "KYC Status"
+msgstr ""
+
+msgid "Account Status"
+msgstr ""
+
+msgid "Plan Selected"
+msgstr ""
+
+msgid "Payment Status"
+msgstr ""
+
+msgid "Up to date"
+msgstr ""
+
+msgid "Overdue"
+msgstr ""
+
+msgid "Pending"
+msgstr ""
+
+msgid "Suspended"
+msgstr ""
+
+msgid "Cancelled"
+msgstr ""
+
+# ============================================================
+#  Canned replies
+# ============================================================
+msgid "Add a Pre-Written Reply"
+msgstr ""
+
+msgid "Header (internal only, not shown to client)"
+msgstr ""
+
+msgid "Attachment URL (optional)"
+msgstr ""
+
+msgid "Reply message…"
+msgstr ""
+
+msgid "Save Reply"
+msgstr ""
+
+msgid "Current Pre-Written Replies"
+msgstr ""
+
+msgid "No canned replies yet."
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "Delete this reply?"
+msgstr ""
+
+msgid "Deleted."
+msgstr ""
+
+# ============================================================
+#  Agents
+# ============================================================
+msgid "Add a New Agent"
+msgstr ""
+
+msgid "Full Name"
+msgstr ""
+
+msgid "Surname"
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Agent"
+msgstr ""
+
+msgid "Team Lead"
+msgstr ""
+
+msgid "Administrator"
+msgstr ""
+
+msgid "Login Username"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Passcode"
+msgstr ""
+
+msgid "Passcode (min 6 chars)"
+msgstr ""
+
+msgid "Save Agent"
+msgstr ""
+
+msgid "Current System Users"
+msgstr ""
+
+msgid "Agent saved!"
+msgstr ""
+
+# ============================================================
+#  Notifications
+# ============================================================
+msgid "Notifications"
+msgstr ""
+
+msgid "Mark all read"
+msgstr ""
+
+msgid "No notifications."
+msgstr ""
+
+msgid "Enable desktop notifications"
+msgstr ""
+
+msgid "Get alerted the moment a new chat arrives, even when this tab is in the background."
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Not now"
+msgstr ""
+
+msgid "Sound alerts"
+msgstr ""
+
+msgid "Enable sound alerts"
+msgstr ""
+
+msgid "Play a soft ping on new chats/messages."
+msgstr ""
+
+msgid "Enable Web Push"
+msgstr ""
+
+msgid "Send browser push notifications (requires HTTPS)."
+msgstr ""
+
+msgid "Desktop notifications"
+msgstr ""
+
+msgid "Use the browser Notification API when the tab is open."
+msgstr ""
+
+# ============================================================
+#  Sidebar / Shell
+# ============================================================
+msgid "Toggle sidebar"
+msgstr ""
+
+msgid "Main navigation"
+msgstr ""
+
+msgid "Admin only"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "Online"
+msgstr ""
+
+msgid "Offline"
+msgstr ""
+
+msgid "Taking chats"
+msgstr ""
+
+msgid "Search chats, clients…"
+msgstr ""
+
+# ============================================================
+#  Settings page (admin)
+# ============================================================
+msgid "Big Drop — Settings"
+msgstr ""
+
+msgid "Widget (Visitor Chat)"
+msgstr ""
+
+msgid "Enable widget"
+msgstr ""
+
+msgid "Show the chat widget on the frontend of the site."
+msgstr ""
+
+msgid "Widget title"
+msgstr ""
+
+msgid "Greeting message"
+msgstr ""
+
+msgid "Position"
+msgstr ""
+
+msgid "Bottom right"
+msgstr ""
+
+msgid "Bottom left"
+msgstr ""
+
+msgid "Widget color"
+msgstr ""
+
+msgid "Chat Behavior"
+msgstr ""
+
+msgid "Chat poll interval (seconds)"
+msgstr ""
+
+msgid "Notification poll interval (seconds)"
+msgstr ""
+
+msgid "Escalate chats after (minutes)"
+msgstr ""
+
+msgid "Auto-assign chats"
+msgstr ""
+
+msgid "Assign chat to the agent on first reply."
+msgstr ""
+
+msgid "Save Settings"
+msgstr ""
+
+msgid "Send Test Push"
+msgstr ""
+
+msgid "Test Web Push"
+msgstr ""
+
+msgid "Send a test push notification to your current browser."
+msgstr ""
+
+msgid "Import Clients (CSV)"
+msgstr ""
+
+msgid "Upload a CSV with columns: account_number, full_name, phone, id_number, kyc_status, account_status, plan_selected, payment_status."
+msgstr ""
+
+msgid "Import CSV"
+msgstr ""
+
+msgid "Diagnostics"
+msgstr ""
+
+msgid "Import finished. %1$d clients imported, %2$d skipped."
+msgstr ""
+
+msgid "Import failed. Please check the file and try again."
+msgstr ""
+
+msgid "Unauthorized"
+msgstr ""
+
+# ============================================================
+#  Visitor widget
+# ============================================================
+msgid "Hi! 👋 How can we help you today?"
+msgstr ""
+
+msgid "We are offline right now. Leave your number and we will get back to you."
+msgstr ""
+
+msgid "Type your message…"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Connecting…"
+msgstr ""
+
+msgid "An agent will be with you shortly."
+msgstr ""
+
+msgid "Tell us a bit about you so we can help you better."
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+msgid "Phone number (optional)"
+msgstr ""
+
+msgid "Email (optional)"
+msgstr ""
+
+msgid "Start Chat"
+msgstr ""
+
+msgid "Please enter your name."
+msgstr ""
+
+msgid "We usually reply in minutes"
+msgstr ""
+
+msgid "Powered by"
+msgstr ""
+
+# ============================================================
+#  Errors / UI
+# ============================================================
+msgid "Failed to load."
+msgstr ""
+
+msgid "Failed to send."
+msgstr ""
+
+msgid "Message cannot be empty"
+msgstr ""
+
+msgid "Chat not found"
+msgstr ""
+
+msgid "Username already exists"
+msgstr ""
+
+msgid "Email already registered"
+msgstr ""
+
+msgid "Password must be at least 6 characters"
+msgstr ""
+
+msgid "Username, email and password are required"
+msgstr ""
+
+msgid "Header and message are required"
+msgstr ""
+
+msgid "Malformed subscription"
+msgstr ""
+
+msgid "No active subscriptions. Enable notifications first."
+msgstr ""
+
+msgid "You are offline"
+msgstr ""
+
+msgid "Big Drop can't reach the server right now. Check your connection and try again — your work will sync as soon as you're back online."
+msgstr ""
+
+msgid "Retry Connection"
+msgstr ""
+
+# ============================================================
+#  Cron / Internal
+# ============================================================
+msgid "Every Minute (Big Drop)"
+msgstr ""
+
+msgid "Every 5 Minutes (Big Drop)"
+msgstr ""
+
+msgid "Chat marked as resolved."
+msgstr ""
+
+msgid "Chat marked as unresolved."
+msgstr ""
+
+msgid "New message from %s"
+msgstr ""
+
+msgid "Chat waiting 3+ minutes"
+msgstr ""
+
+msgid "A visitor has been waiting over 3 minutes. Please respond."
+msgstr ""
+
+msgid "High priority chat"
+msgstr ""
+
+msgid "A visitor has been waiting over 3 minutes."
+msgstr ""
+
+# ============================================================
+#  Standard Greeting / Default canned
+# ============================================================
+msgid "Standard Greeting"
+msgstr ""
+
+msgid "How to register"
+msgstr ""
+
+msgid "Installation timing"
+msgstr ""
+
+msgid "Closing a chat"
+msgstr ""
+
+# ============================================================
+#  PWA / Manifest
+# ============================================================
+msgid "Big Drop Agent Portal"
+msgstr ""
+
+msgid "Live chat agent portal for Big Drop support team."
+msgstr ""
+
+msgid "Chatroom"
+msgstr ""
+
+msgid "My Stats"
+msgstr ""
+
+msgid "Install the Big Drop app for quick access & notifications."
+msgstr ""
+
+msgid "Install"
+msgstr ""

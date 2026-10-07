@@ -1,0 +1,251 @@
+/* ==========================================================
+   Big Drop - Frontend Portal Styles
+   Scoped ONLY to the frontend [bigdrop_portal] page.
+   Does NOT affect the WP-Admin portal.
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. Lock the outer page - no double scrollbars
+   ---------------------------------------------------------- */
+html.bd-portal-html,
+body.bd-portal-body {
+  overflow: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+html.bd-portal-html::-webkit-scrollbar,
+body.bd-portal-body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html.bd-portal-html,
+body.bd-portal-body {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+body.bd-portal-body { background: #F5F7FC; }
+
+/* ----------------------------------------------------------
+   2. Kill theme wrappers on the portal page
+   ---------------------------------------------------------- */
+body.bd-portal-body #page,
+body.bd-portal-body #content,
+body.bd-portal-body .site,
+body.bd-portal-body .site-content,
+body.bd-portal-body .wrapper,
+body.bd-portal-body .page-wrapper,
+body.bd-portal-body .main-wrapper,
+body.bd-portal-body .content-wrapper,
+body.bd-portal-body .container,
+body.bd-portal-body .wrap {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+/* ----------------------------------------------------------
+   3. App shell fills the viewport
+   ---------------------------------------------------------- */
+body.bd-portal-body #bigdrop-app {
+  height: 100vh !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+/* ----------------------------------------------------------
+   4. Only .bd-main scrolls (branded scrollbar)
+   ---------------------------------------------------------- */
+body.bd-portal-body .bd-main {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127, 211, 68, 0.4) transparent;
+}
+body.bd-portal-body .bd-main::-webkit-scrollbar { width: 8px; }
+body.bd-portal-body .bd-main::-webkit-scrollbar-track { background: transparent; }
+body.bd-portal-body .bd-main::-webkit-scrollbar-thumb {
+  background: rgba(127, 211, 68, 0.4);
+  border-radius: 4px;
+}
+body.bd-portal-body .bd-main::-webkit-scrollbar-thumb:hover {
+  background: rgba(127, 211, 68, 0.65);
+}
+
+/* ----------------------------------------------------------
+   5. Sidebar stays fixed at full height
+   ---------------------------------------------------------- */
+body.bd-portal-body .bd-sidebar {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127, 211, 68, 0.4) transparent;
+}
+body.bd-portal-body .bd-sidebar::-webkit-scrollbar { width: 8px; }
+body.bd-portal-body .bd-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(127, 211, 68, 0.4);
+  border-radius: 4px;
+}
+
+/* ----------------------------------------------------------
+   6. WP admin bar adjustment (when logged in as admin)
+   ---------------------------------------------------------- */
+body.bd-portal-body.admin-bar,
+body.bd-portal-body.admin-bar #bigdrop-app,
+body.bd-portal-body.admin-bar .bd-main,
+body.bd-portal-body.admin-bar .bd-sidebar {
+  height: calc(100vh - 32px) !important;
+  max-height: calc(100vh - 32px) !important;
+}
+body.bd-portal-body.admin-bar { margin-top: 32px !important; }
+
+@media screen and (max-width: 782px) {
+  body.bd-portal-body.admin-bar,
+  body.bd-portal-body.admin-bar #bigdrop-app,
+  body.bd-portal-body.admin-bar .bd-main,
+  body.bd-portal-body.admin-bar .bd-sidebar {
+    height: calc(100vh - 46px) !important;
+    max-height: calc(100vh - 46px) !important;
+  }
+  body.bd-portal-body.admin-bar { margin-top: 46px !important; }
+}
+
+/* ----------------------------------------------------------
+   7. Topbar flush to top
+   ---------------------------------------------------------- */
+body.bd-portal-body .bd-topbar {
+  top: 0 !important;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+/* ----------------------------------------------------------
+   8. Views
+   ---------------------------------------------------------- */
+body.bd-portal-body .bd-view {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+body.bd-portal-body .bd-view:not(#bd-view-chatroom):not(#bd-view-internal) {
+  min-height: auto;
+}
+
+/* ----------------------------------------------------------
+   9. Chatroom fills the viewport
+   ---------------------------------------------------------- */
+body.bd-portal-body #bd-view-chatroom.is-active {
+  height: calc(100vh - 60px) !important;
+  padding: 20px 24px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+body.bd-portal-body.admin-bar #bd-view-chatroom.is-active {
+  height: calc(100vh - 92px) !important;
+}
+@media screen and (max-width: 782px) {
+  body.bd-portal-body.admin-bar #bd-view-chatroom.is-active {
+    height: calc(100vh - 106px) !important;
+  }
+}
+
+body.bd-portal-body #bd-view-chatroom .bd-chat-layout {
+  height: 100% !important;
+  max-height: 100% !important;
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+/* ----------------------------------------------------------
+   10. Team Chat fills the viewport
+   ---------------------------------------------------------- */
+body.bd-portal-body #bd-view-internal.is-active {
+  height: calc(100vh - 60px) !important;
+  padding: 20px 24px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+body.bd-portal-body.admin-bar #bd-view-internal.is-active {
+  height: calc(100vh - 92px) !important;
+}
+@media screen and (max-width: 782px) {
+  body.bd-portal-body.admin-bar #bd-view-internal.is-active {
+    height: calc(100vh - 106px) !important;
+  }
+}
+
+body.bd-portal-body #bd-view-internal #bd-internal-chat {
+  height: 100% !important;
+  flex: 1 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.bd-portal-body #bd-view-internal .bd-ichat {
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 0 !important;
+}
+
+/* ----------------------------------------------------------
+   11. Branded scrollbars for internal chat (frontend only)
+   ---------------------------------------------------------- */
+body.bd-portal-body .bd-ichat-threads,
+body.bd-portal-body .bd-ichat-messages {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127, 211, 68, 0.4) transparent;
+}
+body.bd-portal-body .bd-ichat-threads::-webkit-scrollbar,
+body.bd-portal-body .bd-ichat-messages::-webkit-scrollbar { width: 8px; }
+body.bd-portal-body .bd-ichat-threads::-webkit-scrollbar-thumb,
+body.bd-portal-body .bd-ichat-messages::-webkit-scrollbar-thumb {
+  background: rgba(127, 211, 68, 0.4);
+  border-radius: 4px;
+}
+body.bd-portal-body .bd-ichat-threads::-webkit-scrollbar-thumb:hover,
+body.bd-portal-body .bd-ichat-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(127, 211, 68, 0.65);
+}
+
+/* ----------------------------------------------------------
+   12. Hide theme chrome on the portal page
+   ---------------------------------------------------------- */
+body.bd-portal-body .page-loader,
+body.bd-portal-body .site-header,
+body.bd-portal-body .site-footer,
+body.bd-portal-body .breadcrumbs,
+body.bd-portal-body .back-to-top {
+  display: none !important;
+}
+body.bd-portal-body #whatsapp-chat,
+body.bd-portal-body .joinchat,
+body.bd-portal-body #tidio-chat {
+  display: none !important;
+}
+
+/* ----------------------------------------------------------
+   13. Full-screen toggle state (optional)
+   ---------------------------------------------------------- */
+body.bd-portal-body .bd-main {
+  /* Prevent horizontal scroll from the sticky topbar's backdrop-filter */
+  overscroll-behavior: contain;
+}

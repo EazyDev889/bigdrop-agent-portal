@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#7FD344">
+    <title>Offline — Big Drop Agent Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: radial-gradient(circle at 30% 20%, #2F1A7A 0%, #1F0D5E 70%);
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bd-offline-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 48px 40px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .bd-offline-icon {
+            width: 88px;
+            height: 88px;
+            background: linear-gradient(135deg, #7FD344, #2E6B34);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 26px;
+            font-size: 38px;
+            box-shadow: 0 15px 40px rgba(127, 211, 68, 0.4);
+            position: relative;
+            animation: bd-offline-pulse 2s ease-in-out infinite;
+        }
+
+        .bd-offline-icon::before {
+            content: "";
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid rgba(127, 211, 68, 0.4);
+            animation: bd-offline-ring 2s ease-out infinite;
+        }
+
+        @keyframes bd-offline-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes bd-offline-ring {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            margin-bottom: 12px;
+            color: #FFFFFF;
+        }
+
+        h1 span {
+            color: #7FD344;
+        }
+
+        p {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #C6CAF0;
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        .bd-offline-status {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #C6CAF0;
+        }
+
+        .bd-offline-status-dot {
+            width: 9px;
+            height: 9px;
+            background: #C11501;
+            border-radius: 50%;
+            animation: bd-offline-blink 1.4s ease-in-out infinite;
+        }
+
+        @keyframes bd-offline-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .bd-offline-retry {
+            background: #7FD344;
+            color: #1F0D5E;
+            border: none;
+            border-radius: 14px;
+            padding: 15px 34px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 12px 28px rgba(127, 211, 68, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+            letter-spacing: 0.3px;
+        }
+
+        .bd-offline-retry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px rgba(127, 211, 68, 0.5);
+        }
+
+        .bd-offline-retry:active {
+            transform: translateY(0);
+        }
+
+        .bd-offline-retry:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .bd-offline-foot {
+            margin-top: 30px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 11.5px;
+            color: #7D82B0;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .bd-offline-foot strong {
+            color: #7FD344;
+        }
+
+        .bd-offline-tips {
+            margin-top: 24px;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 16px 20px;
+        }
+
+        .bd-offline-tips h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7FD344;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .bd-offline-tips ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .bd-offline-tips li {
+            font-size: 12.5px;
+            color: #C6CAF0;
+            padding: 4px 0 4px 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .bd-offline-tips li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #7FD344;
+            font-weight: 700;
+        }
+
+        @media (max-width: 480px) {
+            .bd-offline-card {
+                padding: 36px 26px;
+                border-radius: 24px;
+            }
+            h1 { font-size: 22px; }
+            .bd-offline-icon {
+                width: 76px;
+                height: 76px;
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bd-offline-card" role="alert" aria-live="polite">
+        <div class="bd-offline-icon" aria-hidden="true">📡</div>
+
+        <h1>You're <span>offline</span></h1>
+        <p>Big Drop can't reach the server right now. Check your connection and try again — your work will sync as soon as you're back online.</p>
+
+        <div class="bd-offline-status">
+            <span class="bd-offline-status-dot"></span>
+            <span id="bd-offline-msg">Waiting for network…</span>
+        </div>
+
+        <button type="button" class="bd-offline-retry" id="bd-retry-btn">
+            Retry Connection
+        </button>
+
+        <div class="bd-offline-tips">
+            <h3>Quick checks</h3>
+            <ul>
+                <li>Is Wi-Fi or mobile data enabled?</li>
+                <li>Are you behind a firewall or VPN?</li>
+                <li>Try opening another website to confirm</li>
+            </ul>
+        </div>
+
+        <div class="bd-offline-foot">
+            <strong>Big Drop</strong> — Agent Portal
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var retryBtn = document.getElementById('bd-retry-btn');
+            var msgEl = document.getElementById('bd-offline-msg');
+
+            function updateOnlineStatus() {
+                if (navigator.onLine) {
+                    msgEl.textContent = 'Back online — reconnecting…';
+                    msgEl.parentElement.querySelector('.bd-offline-status-dot').style.background = '#7FD344';
+
+                    // Auto-reload after a brief moment.
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 800);
+                } else {
+                    msgEl.textContent = 'Waiting for network…';
+                    msgEl.parentElement.querySelector('.bd-offline-status-dot').style.background = '#C11501';
+                }
+            }
+
+            // Update on network changes.
+            window.addEventListener('online', updateOnlineStatus);
+            window.addEventListener('offline', updateOnlineStatus);
+
+            // Retry button.
+            retryBtn.addEventListener('click', function () {
+                retryBtn.disabled = true;
+                retryBtn.textContent = 'Checking…';
+                msgEl.textContent = 'Testing connection…';
+
+                // Simple probe — try to fetch a tiny endpoint.
+                var probe = new Image();
+                var done = false;
+
+                var finish = function (ok) {
+                    if (done) return;
+                    done = true;
+                    if (ok) {
+                        msgEl.textContent = 'Connected — reloading…';
+                        msgEl.parentElement.querySelector('.bd-offline-status-dot').style.background = '#7FD344';
+                        setTimeout(function () { window.location.reload(); }, 600);
+                    } else {
+                        retryBtn.disabled = false;
+                        retryBtn.textContent = 'Retry Connection';
+                        msgEl.textContent = 'Still offline. Try again in a moment.';
+                    }
+                };
+
+                probe.onload = function () { finish(true); };
+                probe.onerror = function () { finish(false); };
+                probe.src = 'https://www.google.com/favicon.ico?_=' + Date.now();
+
+                // Timeout safety.
+                setTimeout(function () { finish(false); }, 5000);
+            });
+
+            // Initial status.
+            updateOnlineStatus();
+        })();
+    </script>
+</body>
+</html>

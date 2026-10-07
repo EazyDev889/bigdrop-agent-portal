@@ -1,0 +1,82 @@
+{
+  "name": "Big Drop Agent Portal",
+  "short_name": "Big Drop",
+  "description": "Live chat agent portal for Big Drop support team.",
+  "id": "/agent-portal/",
+  "start_url": "{{PORTAL_URL}}",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#1F0D5E",
+  "theme_color": "#7FD344",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "{{BD_URL}}assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "{{BD_URL}}assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "{{BD_URL}}assets/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Chatroom",
+      "short_name": "Chats",
+      "description": "Open the live chat queue",
+      "url": "{{PORTAL_URL}}#chatroom",
+      "icons": [
+        {
+          "src": "{{BD_URL}}assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "My Stats",
+      "short_name": "Stats",
+      "description": "View your performance summary",
+      "url": "{{PORTAL_URL}}#performance",
+      "icons": [
+        {
+          "src": "{{BD_URL}}assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Client Accounts",
+      "short_name": "Clients",
+      "description": "Search client accounts",
+      "url": "{{PORTAL_URL}}#clients",
+      "icons": [
+        {
+          "src": "{{BD_URL}}assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "screenshots": [],
+  "launch_handler": {
+    "client_mode": "auto"
+  },
+  "protocol_handlers": [],
+  "gcm_sender_id": "103953800507"
+}
