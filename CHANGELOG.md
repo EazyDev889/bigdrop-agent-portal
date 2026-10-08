@@ -1,3 +1,6 @@
+## 1.0.1
+- Fixed: Reassign/Reopen modal was nested inside the hidden Performance view, so it opened invisibly from the Chatroom. Moved to the app root.
+
 /* Admin-only styles for Big Drop settings pages */
 .bd-admin-wrap .bd-card {
     background: #fff;

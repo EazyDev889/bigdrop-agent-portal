@@ -3,7 +3,7 @@
  * Plugin Name:       Big Drop Agent Portal
  * Plugin URI:        https://bigdrop.co.zw
  * Description:       Complete agent portal with live chat, notifications, PWA support and admin management. Hostinger-shared-hosting ready.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            EazyLabz
@@ -18,7 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Plugin constants.
-define( 'BD_VERSION',  '1.0.0' );
+define( 'BD_VERSION',  '1.0.1' );
 define( 'BD_FILE',     __FILE__ );
 define( 'BD_PATH',     plugin_dir_path( __FILE__ ) );
 define( 'BD_URL',      plugin_dir_url( __FILE__ ) );

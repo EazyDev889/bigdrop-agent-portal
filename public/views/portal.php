@@ -402,20 +402,6 @@ $can_view_clients = BD_Roles::can_view_clients();
                 </div>
             </div>
 
-            <!-- Reassign Modal -->
-            <div class="bd-reassign-backdrop" id="bd-reassign-modal" hidden>
-                <div class="bd-reassign-modal">
-                    <h3>Reassign Chat</h3>
-                    <p class="bd-reassign-info" id="bd-reassign-info"></p>
-                    <label>Assign to</label>
-                    <select id="bd-reassign-select"></select>
-                    <div class="bd-reassign-actions">
-                        <button type="button" class="bd-btn bd-btn-ghost-dark" id="bd-reassign-cancel">Cancel</button>
-                        <button type="button" class="bd-btn" id="bd-reassign-confirm">Reassign</button>
-                    </div>
-                </div>
-            </div>
-
         </section>
         
         <!-- ============ VIEW: TEAM CHAT ============ -->
@@ -507,6 +493,20 @@ $can_view_clients = BD_Roles::can_view_clients();
             </div>
         </div>
     </div>
+
+        <!-- Reassign / Reopen Modal (must live OUTSIDE every .bd-view section, otherwise a hidden view hides it) -->
+        <div class="bd-reassign-backdrop" id="bd-reassign-modal" hidden>
+            <div class="bd-reassign-modal">
+                <h3>Reassign Chat</h3>
+                <p class="bd-reassign-info" id="bd-reassign-info"></p>
+                <label>Assign to</label>
+                <select id="bd-reassign-select"></select>
+                <div class="bd-reassign-actions">
+                    <button type="button" class="bd-btn bd-btn-ghost-dark" id="bd-reassign-cancel">Cancel</button>
+                    <button type="button" class="bd-btn" id="bd-reassign-confirm">Reassign</button>
+                </div>
+            </div>
+        </div>
 
     <!-- Hidden audio element -->
     <audio id="bd-ping" preload="auto">

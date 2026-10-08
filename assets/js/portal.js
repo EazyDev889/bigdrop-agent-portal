@@ -1297,6 +1297,8 @@
     
     var modal = document.getElementById('bd-reassign-modal');
     if (!modal) return;
+    // Safety net: if the modal is nested inside a .bd-view (hidden when another tab is active), lift it to the app root.
+    if (modal.closest && modal.closest('.bd-view') && $app) { $app.appendChild(modal); }
     
     var cancel = document.getElementById('bd-reassign-cancel');
     var confirm = document.getElementById('bd-reassign-confirm');
